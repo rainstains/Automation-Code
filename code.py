@@ -104,9 +104,9 @@ while aksi != 0:
         print(health)
         print("Clients Health: ",health["healthyClient"],"%")
         print("Network Devices Health: ",health["healthyNetworkDevice"],"%")
-        print("Num Routers: ",health["numLicensedRouters"],"%")
-        print("Num Switches: ",health["numLicensedSwitches"],"%")
-        print("Num Unreachable: ",health["numUnreachable"],"%")
+        print("Num Routers: ",health["numLicensedRouters"])
+        print("Num Switches: ",health["numLicensedSwitches"])
+        print("Num Unreachable: ",health["numUnreachable"])
 
         d = input("\npress Enter to Back")
         continue
