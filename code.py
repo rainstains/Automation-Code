@@ -101,7 +101,6 @@ while aksi != 0:
 
         health = respon.json()
 
-        print(health)
         print("Clients Health: ",health["healthyClient"],"%")
         print("Network Devices Health: ",health["healthyNetworkDevice"],"%")
         print("Num Routers: ",health["numLicensedRouters"])
@@ -111,10 +110,7 @@ while aksi != 0:
         d = input("\npress Enter to Back")
         continue
 
-headers = {
-    "X-Auth-Token": serviceTicket
-}
-logout_url = "http://localhost:58000/api/v1/ticket/"+serviceTicket
-r = requests.delete(logout_url, headers=headers, verify=False)
-print(r.status_code)
+# API untuk Delete Tidak Bisa digunakan
+#logout_url = "http://localhost:58000/api/v1/ticket/"+serviceTicket
+#r = requests.delete(logout_url, headers=headers)
 print("Program Dihentikan")
