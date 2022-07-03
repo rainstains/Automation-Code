@@ -139,7 +139,7 @@ webex_Headers = {
 print("Network Programibility Using Rest API")
 print("Network: Local LMS Network in SMK 4")
 username = input("Username: ")
-#password = input("Password: ")
+password = input("Password: ")
 
 headers = {
     "content-type": "application/json"
@@ -147,8 +147,7 @@ headers = {
 
 body_json = {
    "username": username,
-   # "password": password  
-   "password": "1sAdm1nPass!" 
+   "password": password  
 }
 
 r = requests.post(ticket_url, json.dumps(body_json), headers=headers, verify=False)
@@ -167,7 +166,7 @@ serviceTicket = r_json["response"]["serviceTicket"]
 action = 76
 
 headers={"X-Auth-Token": serviceTicket}
-
+next= input("\npress Enter to Back")
 while action != 0:
     os.system('clear')
     print("Action List")
@@ -205,4 +204,4 @@ while action != 0:
 #logout_url = "http://localhost:58000/api/v1/ticket/"+serviceTicket
 #r = requests.delete(logout_url, headers=headers)
 print("Program Terminated")
-print("Network Automation: Code v1.3")
+print("Network Automation: Code v1.4")
