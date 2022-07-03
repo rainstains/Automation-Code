@@ -17,48 +17,61 @@ def networkHealth(webex = False):
     url = "http://localhost:58000/api/v1/network-health"
 
     respon = requests.get(url, headers=headers, verify=False)
-
-    print("Network Health")
-
     health = respon.json()
 
-    print("Clients Health: ",health["healthyClient"],"%")
-    print("Network Devices Health: ",health["healthyNetworkDevice"],"%")
-    print("Num Routers: ",health["numLicensedRouters"])
-    print("Num Switches: ",health["numLicensedSwitches"])
-    print("Num Unreachable: ",health["numUnreachable"])
-
-    d = input("\npress Enter to Back")
+    if webex == False:
+        print("Network Health")
+        print("Clients Health: ",health["healthyClient"],"%")
+        print("Network Devices Health: ",health["healthyNetworkDevice"],"%")
+        print("Num Routers: ",health["numLicensedRouters"])
+        print("Num Switches: ",health["numLicensedSwitches"])
+        print("Num Unreachable: ",health["numUnreachable"])
+        d = input("\npress Enter to Back")
+    elif webex == True:
+        message = "Clients Health: "+health["healthyClient"]+"%"+"\n"
+        message += "Network Devices Health: "+health["healthyNetworkDevice"]+"%"+"\n"
+        message += "Num Routers: "+health["numLicensedRouters"]+"\n"
+        message += "Num Switches: "+health["numLicensedSwitches"]+"\n"
+        message += "Num Unreachable: "+health["numUnreachable"]+"\n"
+        sendingTheMessage(message)
 
 def networkIssues(webex = False):
     url = "http://localhost:58000/api/v1/assurance/health-issues"
 
     respon = requests.get(url, headers=headers, verify=False)
-
-    print("Health Issues")
-
     respon_json = respon.json()
     issues = respon_json["response"]
 
-    print("Source\tIssue\tDescription\tTime")
-    for issue in issues:
-        print(issue["issueSource"], "\t", issue["issueName"], "\t", issue["issueDescription"], "\t", issue["issueTimestamp"])
-    d = input("\npress Enter to Back")
+    if webex == False:
+        print("Health Issues")
+        print("Source\tIssue\tDescription\tTime")
+        for issue in issues:
+            print(issue["issueSource"], "\t", issue["issueName"], "\t", issue["issueDescription"], "\t", issue["issueTimestamp"])
+        d = input("\npress Enter to Back")
+    elif webex == True:
+        message = "Source\tIssue\tDescription\tTime\n"
+        for issue in issues:
+            message += issue["issueSource"]+ "\t"+ issue["issueName"]+ "\t"+ issue["issueDescription"]+ "\t"+ issue["issueTimestamp"]+ "\n"
+        sendingTheMessage(message)
 
 def hostList(webex = False):
     url = "http://localhost:58000/api/v1/host"
 
     respon = requests.get(url, headers=headers, verify=False)
-
-    print("Host List ")
-
     respon_json = respon.json()
     hosts = respon_json["response"]
 
-    print("Hostname\tIP\tMac Address\tConnected Interface")
-    for host in hosts:
-        print(host["hostName"], "\t", host["hostIp"], "\t", host["hostMac"], "\t", host["connectedInterfaceName"])
-    d = input("\npress Enter to Back")
+    if webex = False:
+        print("Host List ")
+        print("Hostname\tIP\tMac Address\tConnected Interface")
+        for host in hosts:
+            print(host["hostName"], "\t", host["hostIp"], "\t", host["hostMac"], "\t", host["connectedInterfaceName"])
+        d = input("\npress Enter to Back")
+    elif webex == True:
+        message = "Hostname\tIP\tMac Address\tConnected Interface\n"
+        for host in hosts:
+            message += host["hostName"]+ "\t"+ host["hostIp"]+ "\t"+ host["hostMac"]+ "\t"+ host["connectedInterfaceName"]+ "\n"
+        sendingTheMessage(message)
 
 def deviceList(webex = False):
     url = "http://localhost:58000/api/v1/network-device"
@@ -104,18 +117,14 @@ def listeningToWebex():
         
         if message == "/Network Device List":
             deviceList(webex = True)
-            break
         elif message == ("/Host List"):
             hostList(webex = True)
-            break
         elif message == ("/Network Issues"):
-hostList(webex = True)
+            networkIssues(webex = True)
+        elif message == ("/Network Health"):
+            networkHealth(webex = True)
+        elif message == ("/Terminate"):
             break
-        #elif message.find("/Network Health") == 0:
-
-        
-
-
 
 ticket_url = "http://localhost:58000/api/v1/ticket"
 accessToken = "Bearer MWJjYWY4MmUtNjFkYS00MDIwLTlhNzktY2Q3MGNiZjBkZmIzNTgxNmZhMDQtNWYz_P0A1_1abaf078-5b80-48ca-9bb3-46107517275f"
