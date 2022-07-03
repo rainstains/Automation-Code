@@ -61,7 +61,7 @@ def hostList(webex = False):
     respon_json = respon.json()
     hosts = respon_json["response"]
 
-    if webex = False:
+    if webex == False:
         print("Host List ")
         print("Hostname\tIP\tMac Address\tConnected Interface")
         for host in hosts:
