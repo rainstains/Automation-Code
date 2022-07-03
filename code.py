@@ -93,16 +93,16 @@ while aksi != 0:
         continue
     elif aksi == 4:
         os.system('clear')
-        url = "http://localhost:58000/api/v1/assurance/network-health"
+        url = "http://localhost:58000/api/v1/network-health"
 
         respon = requests.get(url, headers=headers, verify=False)
 
         print("Network Health")
 
-        respon_json = respon.json()
-        health = respon_json["response"]
+        health = respon.json()
 
-        print("Clients Health: ",health["healtyClient"],"%")
+        print(health)
+        print("Clients Health: ",health["healthyClient"],"%")
         print("Network Devices Health: ",health["healthyNetworkDevice"],"%")
         print("Num Routers: ",health["numLicensedRouters"],"%")
         print("Num Switches: ",health["numLicensedSwitches"],"%")
